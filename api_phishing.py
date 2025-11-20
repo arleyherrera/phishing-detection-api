@@ -37,6 +37,109 @@ print("=" * 80)
 # Extractor de features
 extractor = URLFeatureExtractor()
 
+# Whitelist de dominios confiables (top empresas tecnologicas, bancos, gobiernos)
+TRUSTED_DOMAINS = {
+    # Gigantes tecnologicos
+    'google.com', 'youtube.com', 'gmail.com', 'drive.google.com', 'docs.google.com',
+    'maps.google.com', 'play.google.com', 'gemini.google.com', 'bard.google.com',
+    'facebook.com', 'instagram.com', 'whatsapp.com', 'messenger.com', 'meta.com',
+    'apple.com', 'icloud.com', 'itunes.com', 'apple.co',
+    'microsoft.com', 'outlook.com', 'live.com', 'hotmail.com', 'office.com',
+    'azure.com', 'xbox.com', 'bing.com', 'skype.com',
+    'amazon.com', 'aws.amazon.com', 'primevideo.com',
+    'twitter.com', 'x.com',
+    'linkedin.com',
+    'netflix.com',
+    'spotify.com',
+    'tiktok.com',
+    'zoom.us',
+    'dropbox.com',
+    'github.com', 'gitlab.com',
+    'stackoverflow.com',
+    'reddit.com',
+    'wikipedia.org', 'wikimedia.org',
+    'cloudflare.com',
+
+    # Bancos internacionales
+    'paypal.com',
+    'chase.com', 'jpmorganchase.com',
+    'bankofamerica.com',
+    'wellsfargo.com',
+    'citibank.com', 'citi.com',
+    'hsbc.com',
+    'santander.com',
+    'bbva.com',
+
+    # Bancos de Peru
+    'bcp.com.pe',
+    'scotiabank.com.pe',
+    'bbva.pe',
+    'interbank.pe',
+    'bancodelanacion.gob.pe',
+    'banconacion.gob.pe',
+    'pichincha.pe',
+    'mibanco.com.pe',
+    'cajaarequipa.pe',
+
+    # Gobierno de Peru
+    'gob.pe',
+    'sunat.gob.pe',
+    'reniec.gob.pe',
+    'minsa.gob.pe',
+    'minedu.gob.pe',
+    'pnp.gob.pe',
+    'indecopi.gob.pe',
+
+    # Universidades de Peru
+    'pucp.edu.pe', 'pucp.pe',
+    'uni.edu.pe',
+    'unmsm.edu.pe',
+    'ulima.edu.pe',
+    'upc.edu.pe',
+    'esan.edu.pe',
+    'upn.edu.pe',
+
+    # Otros servicios importantes
+    'adobe.com',
+    'salesforce.com',
+    'oracle.com',
+    'ibm.com',
+    'sap.com',
+    'intuit.com',
+    'shopify.com',
+    'wordpress.com', 'wordpress.org',
+    'wix.com',
+    'godaddy.com',
+    'namecheap.com',
+}
+
+def is_trusted_domain(url):
+    """
+    Verifica si la URL pertenece a un dominio de la whitelist.
+    Retorna True si el dominio base esta en la lista de confianza.
+    """
+    try:
+        parsed = urlparse(url)
+        domain = parsed.netloc.lower()
+
+        # Remover www. si existe
+        if domain.startswith('www.'):
+            domain = domain[4:]
+
+        # Verificar si el dominio exacto esta en whitelist
+        if domain in TRUSTED_DOMAINS:
+            return True
+
+        # Verificar si es un subdominio de algun dominio confiable
+        # Ejemplo: mail.google.com -> google.com
+        for trusted in TRUSTED_DOMAINS:
+            if domain.endswith('.' + trusted):
+                return True
+
+        return False
+    except:
+        return False
+
 def normalize_url(url):
     """
     Normaliza URL removiendo subdomain 'www' y trailing slash para compatibilidad con dataset.
@@ -89,6 +192,17 @@ def predict():
 
         if not url:
             return jsonify({'error': 'URL no proporcionada'}), 400
+
+        # WHITELIST: Verificar si es un dominio confiable
+        if is_trusted_domain(url):
+            return jsonify({
+                'url': url,
+                'prediction': 'safe',
+                'confidence': 1.0,
+                'features_extracted': 56,
+                'features_required': 56,
+                'warning': 'Dominio verificado en whitelist de sitios confiables'
+            }), 200
 
         # Normalizar URL (remover www para compatibilidad)
         url_normalized = normalize_url(url)
