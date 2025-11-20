@@ -39,7 +39,7 @@ extractor = URLFeatureExtractor()
 
 def normalize_url(url):
     """
-    Normaliza URL removiendo subdomain 'www' para compatibilidad con dataset.
+    Normaliza URL removiendo subdomain 'www' y trailing slash para compatibilidad con dataset.
 
     El dataset Tranco no incluye 'www', por lo que URLs como www.google.com
     tienen 2 dots (phishing-like) vs google.com con 1 dot (legitimate).
@@ -52,8 +52,13 @@ def normalize_url(url):
     if domain.startswith('www.'):
         domain = domain[4:]
 
+    # Remover trailing slash del path (solo si path es "/" o termina en "/")
+    path = parsed.path
+    if path == '/' or (path.endswith('/') and len(path) > 1):
+        path = path.rstrip('/')
+
     # Reconstruir URL normalizada
-    normalized = f"{parsed.scheme}://{domain}{parsed.path}"
+    normalized = f"{parsed.scheme}://{domain}{path}" if path else f"{parsed.scheme}://{domain}"
     if parsed.query:
         normalized += f"?{parsed.query}"
     if parsed.fragment:
