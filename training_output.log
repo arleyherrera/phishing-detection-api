@@ -1,0 +1,24 @@
+[NbConvertApp] Converting notebook 03_model_training.ipynb to notebook
+C:\Users\arley\AppData\Roaming\Python\Python312\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()
+C:\Users\arley\AppData\Roaming\Python\Python312\site-packages\xgboost\training.py:183: UserWarning: [23:14:02] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\arley\AppData\Roaming\Python\Python312\site-packages\xgboost\training.py:183: UserWarning: [23:14:02] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\arley\AppData\Roaming\Python\Python312\site-packages\xgboost\training.py:183: UserWarning: [23:14:02] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\arley\AppData\Roaming\Python\Python312\site-packages\xgboost\training.py:183: UserWarning: [23:14:02] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\arley\AppData\Roaming\Python\Python312\site-packages\xgboost\training.py:183: UserWarning: [23:14:02] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+[NbConvertApp] Writing 111722 bytes to 03_model_training.ipynb

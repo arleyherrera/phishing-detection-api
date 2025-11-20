@@ -180,7 +180,7 @@ class LogisticRegressionTrainer(BaseModelTrainer):
 
         if use_grid_search:
             param_grid = {
-                'C': [0.1, 1, 10],
+                'C': [1, 10],
                 'penalty': ['l2'],
                 'solver': ['liblinear'],
                 'max_iter': [500]
@@ -287,7 +287,7 @@ class RandomForestTrainer(BaseModelTrainer):
 
         if use_grid_search:
             param_grid = {
-                'n_estimators': [100, 200],
+                'n_estimators': [100],
                 'max_depth': [10, 20],
                 'min_samples_split': [2],
                 'min_samples_leaf': [1],
@@ -351,8 +351,8 @@ class XGBoostTrainer(BaseModelTrainer):
 
         if use_grid_search:
             param_grid = {
-                'max_depth': [3, 5],
-                'learning_rate': [0.1, 0.3],
+                'max_depth': [3],
+                'learning_rate': [0.1],
                 'n_estimators': [100],
                 'subsample': [0.8],
                 'colsample_bytree': [0.8]
@@ -470,9 +470,9 @@ class SVMTrainer(BaseModelTrainer):
 
         if use_grid_search:
             param_grid = {
-                'C': [0.1, 1, 10, 100],
-                'kernel': ['rbf', 'linear'],
-                'gamma': ['scale', 'auto']
+                'C': [1],
+                'kernel': ['linear'],
+                'gamma': ['scale']
             }
 
             base_model = SVC(random_state=self.random_state, probability=True)

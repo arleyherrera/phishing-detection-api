@@ -1,0 +1,20 @@
+======================================================================
+   RESUMEN DE VALIDACIÓN DEL MODELO
+======================================================================
+
+Modelo utilizado: random_forest
+
+Muestra de validación: 100 URLs
+  - Legítimas: 42
+  - Phishing: 58
+
+Métricas:
+  - Accuracy:  1.0000
+  - Precision: 1.0000
+  - Recall:    1.0000
+  - F1-Score:  1.0000
+
+Errores:
+  - Falsos positivos: 0
+  - Falsos negativos: 0
+  - Total: 0 (0.00%)

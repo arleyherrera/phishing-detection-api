@@ -1,0 +1,3 @@
+Best Model: random_forest
+F1-Score (Val): 1.0000
+F1-Score (Test): 1.0000
