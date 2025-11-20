@@ -1,3 +1,4 @@
+# Python
 venv/
 __pycache__/
 *.pyc
@@ -7,8 +8,21 @@ __pycache__/
 # Jupyter
 .ipynb_checkpoints/
 
-# Datos y resultados grandes (ajusta según lo que sí quieras versionar)
-data/
-results/
-models/
+# Solo ignorar archivos CSV grandes de raw y external
+data/raw/*.csv
+data/external/*.csv
+
+# Los datos procesados SÍ se incluyen (son resultado del preprocesamiento)
+
+# Mantener estructura de directorios
+!data/.gitkeep
+!data/raw/.gitkeep
+!data/external/.gitkeep
+!data/processed/.gitkeep
+!models/.gitkeep
+!results/.gitkeep
+!results/metrics/.gitkeep
+!results/visualizations/.gitkeep
+
+# Logs temporales
 training_log.txt
