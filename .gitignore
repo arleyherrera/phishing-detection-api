@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Datos y resultados grandes (ajusta según lo que sí quieras versionar)
+data/
+results/
+models/
+training_log.txt
